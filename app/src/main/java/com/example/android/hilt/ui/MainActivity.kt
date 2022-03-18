@@ -25,9 +25,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
- * Main activity of the application.
- *
- * Container for the Buttons & Logs fragments. This activity simply tracks clicks on buttons.
+ * Main activity of the application. Container for the Buttons & Logs fragments. This activity
+ * simply tracks clicks on buttons. The AndroidEntryPoint annotation Marks an Android component
+ * class to be setup for injection with the standard Hilt Dagger Android components. This will
+ * generate a base class that the annotated class should extend, either directly or via the Hilt
+ * Gradle Plugin (as we do). This base class will take care of injecting members into the Android
+ * class as well as handling instantiating the proper Hilt components at the right point in the
+ * lifecycle. The name of the base class will be "Hilt_MainActivity".
  */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
