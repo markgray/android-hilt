@@ -27,19 +27,44 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.hilt.R
 import com.example.android.hilt.data.Log
 import com.example.android.hilt.data.LoggerDataSource
+import com.example.android.hilt.data.LoggerInMemoryDataSource
 import com.example.android.hilt.di.InMemoryLogger
 import com.example.android.hilt.util.DateFormatter
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.internal.GeneratedComponentManagerHolder
 import javax.inject.Inject
 
 /**
- * Fragment that displays the database logs.
+ * Fragment that displays the database logs. The `AndroidEntryPoint` annotation marks this class to
+ * be setup for injection with the standard Hilt Dagger Android components. This annotation will
+ * generate a base class that the annotated class should extend, either directly or via the Hilt
+ * Gradle Plugin (as we do). This base class will take care of injecting members into the Android
+ * class as well as handling instantiating the proper Hilt components at the right point in the
+ * lifecycle. The name of the base class will be "Hilt_LogsFragment.java" which extends
+ * [Fragment] and implements [GeneratedComponentManagerHolder]. When using the Gradle plugin, this
+ * is swapped as the base class via bytecode transformation.
  */
 @AndroidEntryPoint
 class LogsFragment : Fragment() {
 
+    /**
+     * The `InMemoryLogger` is an annotation we define in the di/LoggingModule.kt file which is used
+     * to `Binds` the construction of a [LoggerDataSource] to an injected [LoggerInMemoryDataSource].
+     * in the method `bindInMemoryLogger`, and the `Inject` annotation causes Hilt to populate this
+     * field for us automagically in the onAttach() lifecycle method with instances built in the
+     * dependencies container that Hilt automatically generated for LogsFragment.
+     */
     @InMemoryLogger
     @Inject lateinit var logger: LoggerDataSource
+
+    /**
+     * The `Inject` annotation causes Hilt to populate this field for us automagically in the
+     * onAttach() lifecycle method with instances built in the dependencies container that Hilt
+     * automatically generated for LogsFragment. The [DateFormatter] zero argument constructor is
+     * annotated with `Inject` so Hilt will use it to populate this field for us automagically in
+     * the onAttach() lifecycle method with instances built in the dependencies container that Hilt
+     * automatically generated for LogsFragment.
+     */
     @Inject lateinit var dateFormatter: DateFormatter
 
     private lateinit var recyclerView: RecyclerView

@@ -31,7 +31,7 @@ import javax.inject.Inject
  * generate a base class that the annotated class should extend, either directly or via the Hilt
  * Gradle Plugin (as we do). This base class will take care of injecting members into the Android
  * class as well as handling instantiating the proper Hilt components at the right point in the
- * lifecycle. The name of the base class will be "Hilt_MainActivity".
+ * lifecycle. The name of the base class will be "Hilt_MainActivity.java".
  */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

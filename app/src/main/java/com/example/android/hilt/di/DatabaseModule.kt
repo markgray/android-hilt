@@ -31,6 +31,16 @@ import javax.inject.Singleton
 @Module
 object DatabaseModule {
 
+    /**
+     * The `Provides` annotation tells Hilt how to provide types that cannot be constructor injected.
+     * The function body of a function that is annotated with @Provides will be executed every time
+     * Hilt needs to provide an instance of that type. The return type of the `Provides`-annotated
+     * function tells Hilt the binding type, the type that the function provides instances of.
+     * The function parameters are the dependencies of that type. The `Singleton` annotation
+     * identifies this as a type that the injector only instantiates once. The `ApplicationContext`
+     * annotation tells Hilt to use the default application context binding to provide the [Context]
+     * dependency [appContext].
+     */
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext appContext: Context): AppDatabase {
@@ -41,6 +51,16 @@ object DatabaseModule {
         ).build()
     }
 
+    /**
+     * The `Provides` annotation tells Hilt how to provide types that cannot be constructor injected.
+     * The function body of a function that is annotated with @Provides will be executed every time
+     * Hilt needs to provide an instance of that type. The return type of the `Provides`-annotated
+     * function tells Hilt the binding type, the type that the function provides instances of.
+     * The function parameters are the dependencies of that type. This code tells Hilt that
+     * database.logDao() needs to be executed when providing an instance of LogDao. Since we have
+     * AppDatabase as a transitive dependency, we also need to tell Hilt how to provide instances
+     * of that type as we do above.
+     */
     @Provides
     fun provideLogDao(database: AppDatabase): LogDao {
         return database.logDao()
