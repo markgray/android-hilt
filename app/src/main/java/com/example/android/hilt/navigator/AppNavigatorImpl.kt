@@ -28,7 +28,8 @@ import javax.inject.Inject
  * in superclasses are injected before those in subclasses. Ordering of injection among fields and
  * among methods in the same class is not specified. Injectable constructors are annotated with
  * Inject and accept zero or more dependencies as arguments. Inject can apply to at most one
- * constructor per class.
+ * constructor per class. Note: because an AppNavigator instance is provided in the `Activity`
+ * container , [FragmentActivity] is already available as a predefined binding.
  *
  * @param activity the [FragmentActivity] that the fragments we construct are to be associated with.
  * This constructor is automagically called by the AppNavigatorImpl_Factory.java factory class that

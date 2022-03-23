@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.example.android.hilt.di
 
 import com.example.android.hilt.data.LoggerDataSource
@@ -28,6 +30,10 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+/**
+ * The `Qualifier` annotation identifies qualifier annotations. A qualifier is an annotation used to
+ * identify a binding.
+ */
 @Qualifier
 annotation class InMemoryLogger
 

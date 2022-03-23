@@ -20,6 +20,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.hilt.R
 import com.example.android.hilt.navigator.AppNavigator
+import com.example.android.hilt.navigator.AppNavigatorImpl
 import com.example.android.hilt.navigator.Screens
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,6 +37,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    /**
+     * This is annotated with the `Inject` so that Hilt will provide an instance of it using the
+     * `bindNavigator` method in the file di/NavigationModule.kt and the [AppNavigatorImpl] instance
+     * it provides implements the [AppNavigator.navigateTo] method which we use to navigate to the
+     * fragment we want to be showing.
+     */
     @Inject lateinit var navigator: AppNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
