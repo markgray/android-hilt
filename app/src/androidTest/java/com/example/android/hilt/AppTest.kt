@@ -30,17 +30,52 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.Matchers.containsString
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 
+/**
+ * When a class is annotated with @RunWith or extends a class annotated with @RunWith, JUnit will
+ * invoke the class it references to run the tests in that class instead of the runner built into
+ * JUnit. [AndroidJUnit4] is a JUnit4 runner for Android tests. This runner offers several features
+ * on top of the standard JUnit4 runner:
+ *  - Supports running on Robolectric. This implementation will delegate to RobolectricTestRunner if
+ *  test is running in Robolectric environment. A custom runner can be provided by specifying the
+ *  full class name in a 'android.junit.runner' system property.
+ *  - Supports a per-test timeout - specified via a 'timeout_msec' `AndroidJUnitRunner` argument.
+ *  - Supports running tests on the application's UI Thread, for tests annotated with UiThreadTest.
+ *
+ * The `HiltAndroidTest` annotation is used to mark an Android emulator test that requires injection.
+ */
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
 class AppTest {
 
+    /**
+     * The `@get:Rule` annotation annotates the getter of the kotlin Rule property and is used to
+     * annotate the [hiltRule] field to indicate that it references rules or methods that return a
+     * rule. The Statement passed to the TestRule will run any Before methods, then the Test method,
+     * and finally any After methods, throwing an exception if any of these fail. [HiltAndroidRule]
+     * is a [TestRule] for Hilt that can be used with JVM or Instrumentation tests. This rule is
+     * required. The Dagger component will not be created without this test rule. A [TestRule] is an
+     * alteration in how a test method, or set of test methods, is run and reported. A [TestRule]
+     * may add additional checks that cause a test that would otherwise fail to pass, or it may
+     * perform necessary setup or cleanup for tests, or it may observe test execution to report it
+     * elsewhere. TestRules can do everything that could be done previously with methods annotated
+     * with Before, After, BeforeClass, or AfterClass, but they are more powerful, and more easily
+     * shared between projects and classes.
+     */
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
     @Test
     fun happyPath() {
+        // Launches the `MainActivity` activity and constructs ActivityScenario with the activity.
+        // Waits for the lifecycle state transitions to be complete. Typically the initial state of
+        // the activity is State.RESUMED but can be in another state. For instance, if your activity
+        // calls Activity.finish from your Activity.onCreate, the state is State.DESTROYED when this
+        // method returns. If you need to supply parameters to the start activity intent, use
+        // launch(Intent). This method cannot be called from the main thread except in
+        // Robolectric tests.
         ActivityScenario.launch(MainActivity::class.java)
 
         // Check Buttons fragment screen is displayed
