@@ -47,6 +47,17 @@ private const val CODE_LOGS_ITEM = 2
  */
 class LogsContentProvider: ContentProvider() {
 
+    /**
+     * The `EntryPoint` annotation marks this interface as an entry point into a generated component.
+     * This annotation must be used with `InstallIn` to indicate which component(s) should have this
+     * entry point, in our case it is installed in the `SingletonComponent` since we want the
+     * dependency from an instance of the Application container. When assembling components, Hilt
+     * will make the indicated components extend the interface marked with the `EntryPoint` annotation.
+     * Our [getLogDao] method uses the [EntryPointAccessors.fromApplication] to retrieve the
+     * entry point interface from our application. Then it retrieves a [LogDao] instance provided by
+     * Hilt using the [LogsContentProviderEntryPoint.logDao] method of the
+     * [LogsContentProviderEntryPoint] implementation it returns.
+     */
     @InstallIn(SingletonComponent::class)
     @EntryPoint
     interface LogsContentProviderEntryPoint {
@@ -95,7 +106,7 @@ class LogsContentProvider: ContentProvider() {
      * Gets a LogDao instance provided by Hilt using the @EntryPoint annotated interface.
      */
     private fun getLogDao(appContext: Context): LogDao {
-        val hiltEntryPoint = EntryPointAccessors.fromApplication(
+        val hiltEntryPoint: LogsContentProviderEntryPoint = EntryPointAccessors.fromApplication(
             appContext,
             LogsContentProviderEntryPoint::class.java
         )
