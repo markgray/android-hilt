@@ -30,7 +30,7 @@ import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import java.lang.UnsupportedOperationException
 
-/** The authority of this content provider.  */
+/** The path of this content provider.  */
 private const val LOGS_TABLE = "logs"
 
 /** The authority of this content provider.  */
@@ -64,19 +64,62 @@ class LogsContentProvider: ContentProvider() {
         fun logDao(): LogDao
     }
 
+    /**
+     * [UriMatcher] that we use to aid us in matching URIs received by our [query] method. Its
+     * [UriMatcher.match] method will return [CODE_LOGS_DIR] when it matches the URI:
+     *
+     * "content://com.example.android.hilt.provider/logs"
+     *
+     * and it will return [CODE_LOGS_ITEM] when it matches the URI:
+     *
+     * "content://com.example.android.hilt.provider/logs/&#42;"
+     */
     private val matcher: UriMatcher = UriMatcher(UriMatcher.NO_MATCH).apply {
         addURI(AUTHORITY, LOGS_TABLE, CODE_LOGS_DIR)
         addURI(AUTHORITY, "$LOGS_TABLE/*", CODE_LOGS_ITEM)
     }
 
+    /**
+     * We implement this to initialize our content provider on startup. This method is called for
+     * all registered content providers on the application main thread at application launch time.
+     * It must not perform lengthy operations, or application startup will be delayed.
+     *
+     * @return `true` if the provider was successfully loaded, `false` otherwise, we always return
+     * `true`.
+     */
     override fun onCreate(): Boolean {
         return true
     }
 
     /**
-     * Queries all the logs or an individual log from the logs database.
+     * Queries all the logs or an individual log from the logs database. We initialize our [Int]
+     * variable `val code` to the value that the [UriMatcher.match] method of [matcher] returns when
+     * it tries to match against the path in our [Uri] parameter [uri]. If `code` is anything other
+     * than [CODE_LOGS_DIR] or [CODE_LOGS_ITEM] we throw [IllegalArgumentException] "Unknown URI:".
+     * Otherwise we initialize our [Context] variable `val appContext` to the context of the single,
+     * global `Application` object of the current process (throwing [IllegalStateException] if this
+     * is `null`). Next we initialize our [LogDao] variable `val logDao` to the instance that is
+     * returned by our [getLogDao] method when it is passed `appContext`. We initialize our [Cursor]
+     * variable `val cursor` to the [Cursor] returned by the [LogDao.selectAllLogsCursor] method of
+     * `logDao` if `code` is equal to [CODE_LOGS_DIR] or to the [Cursor] returned for the [Long] that
+     * the [ContentUris.parseId] method parses from the last segment of [uri] when that value is
+     * passed to the [LogDao.selectLogById] method of `logDao` otherwise. Finally we call the
+     * [Cursor.setNotificationUri] method of `cursor` to register it to watch for changes to `uri`,
+     * and return `cursor` to the caller.
      *
-     * For the sake of this codelab, the logic has been simplified.
+     * @param uri The URI to query. This will be the full URI sent by the client; if the client is
+     * requesting a specific record, the URI will end in a record number that the implementation
+     * should parse and add to a WHERE or HAVING clause, specifying that _id value.
+     * @param projection The list of columns to put into the cursor. If `null` all columns are
+     * included.
+     * @param selection A selection criteria to apply when filtering rows. If `null` then all rows
+     * are included.
+     * @param selectionArgs You may include ?s in selection, which will be replaced by the values
+     * from [selectionArgs], in order that they appear in the selection. The values will be bound
+     * as Strings.
+     * @param sortOrder How the rows in the cursor should be sorted. If `null` then the provider is
+     * free to define the sort order.
+     * @return a [Cursor] or `null`.
      */
     override fun query(
         uri: Uri,
@@ -87,7 +130,7 @@ class LogsContentProvider: ContentProvider() {
     ): Cursor? {
         val code: Int = matcher.match(uri)
         return if (code == CODE_LOGS_DIR || code == CODE_LOGS_ITEM) {
-            val appContext = context?.applicationContext ?: throw IllegalStateException()
+            val appContext: Context = context?.applicationContext ?: throw IllegalStateException()
             val logDao: LogDao = getLogDao(appContext)
 
             val cursor: Cursor? = if (code == CODE_LOGS_DIR) {
@@ -103,7 +146,16 @@ class LogsContentProvider: ContentProvider() {
     }
 
     /**
-     * Gets a LogDao instance provided by Hilt using the @EntryPoint annotated interface.
+     * Gets a LogDao instance provided by Hilt using the @EntryPoint annotated interface. We initialize
+     * our [LogsContentProviderEntryPoint] variable `val hiltEntryPoint` using the method
+     * [EntryPointAccessors.fromApplication] to retrieve the [LogsContentProviderEntryPoint] entry
+     * point interface from our application. We then return the [LogDao] that the `logDao` method
+     * of `hiltEntryPoint` returns.
+     *
+     * @param appContext the context of the single, global `Application` object of the current
+     * process.
+     * @return the [LogDao] that Hilt provides from the [LogsContentProviderEntryPoint] interface
+     * thanks to the @EntryPoint annotation.
      */
     private fun getLogDao(appContext: Context): LogDao {
         val hiltEntryPoint: LogsContentProviderEntryPoint = EntryPointAccessors.fromApplication(
@@ -113,10 +165,28 @@ class LogsContentProvider: ContentProvider() {
         return hiltEntryPoint.logDao()
     }
 
+    /**
+     * Implement this to handle requests to insert a new row. We throw [UnsupportedOperationException]
+     * "Only reading operations are allowed".
+     *
+     * @param uri The content:// URI of the insertion request.
+     * @param values A set of column_name/value pairs to add to the database.
+     * @return The URI for the newly inserted item.
+     */
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         throw UnsupportedOperationException("Only reading operations are allowed")
     }
 
+    /**
+     * Implement this to handle requests to update one or more rows. We just throw
+     * [UnsupportedOperationException] "Only reading operations are allowed".
+     *
+     * @param uri The URI to query. This can potentially have a record ID if
+     * this is an update request for a specific record.
+     * @param values A set of column_name/value pairs to update in the database.
+     * @param selection An optional filter to match rows to update.
+     * @return the number of rows affected.
+     */
     override fun update(
         uri: Uri,
         values: ContentValues?,
@@ -126,10 +196,26 @@ class LogsContentProvider: ContentProvider() {
         throw UnsupportedOperationException("Only reading operations are allowed")
     }
 
+    /**
+     * Implement this to handle requests to delete one or more rows. We just throw
+     * [UnsupportedOperationException] "Only reading operations are allowed".
+     *
+     * @param uri The full URI to query, including a row ID (if a specific
+     * record is requested).
+     * @param selection An optional restriction to apply to rows when deleting.
+     * @return The number of rows affected.
+     */
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
         throw UnsupportedOperationException("Only reading operations are allowed")
     }
 
+    /**
+     * Implement this to handle requests for the MIME type of the data at the given URI. We throw
+     * [UnsupportedOperationException] "Only reading operations are allowed".
+     *
+     * @param uri the URI to query.
+     * @return a MIME type string, or {@code null} if there is no type.
+     */
     override fun getType(uri: Uri): String? {
         throw UnsupportedOperationException("Only reading operations are allowed")
     }
