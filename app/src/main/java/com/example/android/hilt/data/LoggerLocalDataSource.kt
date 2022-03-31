@@ -18,17 +18,37 @@ package com.example.android.hilt.data
 
 import android.os.Handler
 import android.os.Looper
+import com.example.android.hilt.ui.ButtonsFragment
+import com.example.android.hilt.ui.LogsFragment
+import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
 /**
- * Data manager class that handles data manipulation between the database and the UI.
+ * Data manager class that handles data manipulation between the database and the UI. The Inject
+ * annotation Identifies injectable constructors, methods, and fields. Constructors are injected
+ * first, followed by fields, and then methods. Fields and methods in superclasses are injected
+ * before those in subclasses. Ordering of injection among fields and among methods in the same
+ * class is not specified. Injectable constructors are annotated with Inject and accept zero or
+ * more dependencies as arguments. Inject can apply to at most one constructor per class. Hilt
+ * generates the [LoggerLocalDataSource_Factory] class from this file which implements the
+ * `Factory` of [LoggerLocalDataSource] interface with its [LoggerLocalDataSource_Factory.get]
+ * method supplying a new instance of [LoggerLocalDataSource] constructed from a fully-constructed
+ * and injected instance of [LogDao]. Used as the argument of the `bindDatabaseLogger` method
+ * of the `LoggingDatabaseModule` abstract class used to generate the [LoggerDataSource] it injects
+ * into [ButtonsFragment] and [LogsFragment] when the `DatabaseLogger` annotation is applied instead
+ * of the `InMemoryLogger` annotation to the `Inject` annotation of the [LoggerDataSource].
+ *
+ * @param logDao the [LogDao] we are to use to access our database.
  */
 class LoggerLocalDataSource @Inject constructor(private val logDao: LogDao) : LoggerDataSource {
 
+    /**
+     * The [ExecutorService] that we use as the [Executor] when we call methods in our [LogDao]
+     */
     private val executorService: ExecutorService = Executors.newFixedThreadPool(4)
-    private val mainThreadHandler by lazy {
+    private val mainThreadHandler: Handler by lazy {
         Handler(Looper.getMainLooper())
     }
 
