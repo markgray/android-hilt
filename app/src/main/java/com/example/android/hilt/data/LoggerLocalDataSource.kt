@@ -48,10 +48,21 @@ class LoggerLocalDataSource @Inject constructor(private val logDao: LogDao) : Lo
      * The [ExecutorService] that we use as the [Executor] when we call methods in our [LogDao]
      */
     private val executorService: ExecutorService = Executors.newFixedThreadPool(4)
+
+    /**
+     * The [Handler] we use to post [Runnable]'s to be run on the main thread.
+     */
     private val mainThreadHandler: Handler by lazy {
         Handler(Looper.getMainLooper())
     }
 
+    /**
+     * Constructs a [Log] instance from our [String] parameter [msg] and the current system time and
+     * adds it to our Room database.
+     *
+     * @param msg the [String] to use for the [Log] instance we construct and add to our Room
+     * database.
+     */
     override fun addLog(msg: String) {
         executorService.execute {
             logDao.insertAll(
