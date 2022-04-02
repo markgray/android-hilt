@@ -32,11 +32,19 @@ import javax.inject.Singleton
 
 /**
  * The `Qualifier` annotation identifies qualifier annotations. A qualifier is an annotation used to
- * identify a binding.
+ * identify a binding. When an `Inject` annotation for a [LoggerDataSource] dependency is annotated
+ * with [InMemoryLogger] the [LoggingInMemoryModule.bindInMemoryLogger] method is used by Hilt to
+ * construct the [LoggerDataSource] instance required.
  */
 @Qualifier
 annotation class InMemoryLogger
 
+/**
+ * The `Qualifier` annotation identifies qualifier annotations. A qualifier is an annotation used to
+ * identify a binding. When an `Inject` annotation for a [LoggerDataSource] dependency is annotated
+ * with [DatabaseLogger] the [LoggingDatabaseModule.bindDatabaseLogger] method is used by Hilt to
+ * construct the [LoggerDataSource] instance required.
+ */
 @Qualifier
 annotation class DatabaseLogger
 
