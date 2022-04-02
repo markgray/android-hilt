@@ -27,6 +27,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * The `InstallIn` annotation declared that this object should be included in the Application class,
+ * and the `Module` annotation is used to signal to Hilt that this class tells Hilt how to provide
+ * instances of [AppDatabase] and [LogDao].
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 object DatabaseModule {
