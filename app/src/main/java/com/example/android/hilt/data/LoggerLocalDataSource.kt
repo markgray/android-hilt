@@ -58,7 +58,10 @@ class LoggerLocalDataSource @Inject constructor(private val logDao: LogDao) : Lo
 
     /**
      * Constructs a [Log] instance from our [String] parameter [msg] and the current system time and
-     * adds it to our Room database.
+     * adds it to our Room database. We use the [Executor.execute] method of our [ExecutorService]
+     * field [executorService] to execute a block on one of its four threads which calls the
+     * [LogDao.insertAll] method of our field [logDao] to insert a [Log] instance constructed from
+     * our [String] parameter [msg] and the current system time into the `Room` database.
      *
      * @param msg the [String] to use for the [Log] instance we construct and add to our Room
      * database.
@@ -74,13 +77,29 @@ class LoggerLocalDataSource @Inject constructor(private val logDao: LogDao) : Lo
         }
     }
 
+    /**
+     * Retrieves all of the e [Log] entries stored in our `Room` database in a [List] of [Log] then
+     * calls our [callback] lambda parameter with that [List]. We use the [Executor.execute] method
+     * of our [ExecutorService] field [executorService] to execute a block on one of its four threads
+     * which initializes the [List] of [Log] variable `val logs` to the [List] returned from the
+     * [LogDao.getAll] method of our field [logDao], then posts a call to our [callback] parameter
+     * with that [List] on the message queue of our [Handler] field [mainThreadHandler].
+     *
+     * @param callback a lambda which takes a [List] of [Log] objects as its argument.
+     */
     override fun getAllLogs(callback: (List<Log>) -> Unit) {
         executorService.execute {
-            val logs = logDao.getAll()
+            val logs: List<Log> = logDao.getAll()
             mainThreadHandler.post { callback(logs) }
         }
     }
 
+    /**
+     * Removes all [Log] instances stored in our `Room` database. We use the [Executor.execute]
+     * method of our [ExecutorService] field [executorService] to execute a block on one of its
+     * four threads which calls the [LogDao.nukeTable] method of our field [logDao] to have it
+     * remove all of the entries in the `logs` table of our `Room` database.
+     */
     override fun removeLogs() {
         executorService.execute {
             logDao.nukeTable()
