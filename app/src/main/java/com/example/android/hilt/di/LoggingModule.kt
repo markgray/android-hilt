@@ -48,20 +48,41 @@ annotation class InMemoryLogger
 @Qualifier
 annotation class DatabaseLogger
 
+/**
+ * The `InstallIn` annotation declared that this object should be included in the Application class,
+ * and the `Module` annotation is used to signal to Hilt that this class tells Hilt how to provide
+ * instances of [LoggerDataSource], when that dependency is annotated with `DatabaseLogger`.
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class LoggingDatabaseModule {
 
+    /**
+     * The `Binds` annotation tells Hilt to provide an instance of [LoggerLocalDataSource] when
+     * a [LoggerDataSource] dependency labeled with the `DatabaseLogger` annotation is encountered,
+     * and the `Singleton` annotation indicates to Hilt that the injector only instantiates once.
+     */
     @DatabaseLogger
     @Singleton
     @Binds
     abstract fun bindDatabaseLogger(impl: LoggerLocalDataSource): LoggerDataSource
 }
 
+/**
+ * The `InstallIn` annotation declared that this object should be included in the Activity class,
+ * and the `Module` annotation is used to signal to Hilt that this class tells Hilt how to provide
+ * instances of [LoggerDataSource], when that dependency is annotated with `InMemoryLogger`.
+ */
 @InstallIn(ActivityComponent::class)
 @Module
 abstract class LoggingInMemoryModule {
 
+    /**
+     * The `Binds` annotation tells Hilt to provide an instance of [LoggerInMemoryDataSource] when
+     * a [LoggerDataSource] dependency labeled with the `DatabaseLogger` annotation is encountered,
+     * and the `ActivityScoped` annotation indicates to Hilt the binding should exist for the life
+     * of an activity.
+     */
     @InMemoryLogger
     @ActivityScoped
     @Binds
