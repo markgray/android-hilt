@@ -16,7 +16,11 @@
 
 package com.example.android.hilt.navigator
 
+import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.android.hilt.R
 import com.example.android.hilt.ui.ButtonsFragment
 import com.example.android.hilt.ui.LogsFragment
@@ -38,8 +42,21 @@ import javax.inject.Inject
  */
 class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivity) : AppNavigator {
 
+    /**
+     * Navigate to a given screen. First we initialize our [Fragment] variable `val fragment` to
+     * a new instance of [ButtonsFragment] when our [screen] parameter is [Screens.BUTTONS] or a
+     * new instance of [LogsFragment] is it is [Screens.LOGS]. Then we use the [FragmentManager]
+     * for interacting with fragments associated with this activity to begin a [FragmentTransaction]
+     * which we use to replace the current contents of the [FrameLayout] with ID [R.id.main_container]
+     * with the [Fragment] `fragment`, then use that [FragmentTransaction] to add the transaction to
+     * the back stack, using the canonical name of the underlying class of `fragment` as the name
+     * for this back stack state, after which we call the [FragmentTransaction.commit] method of
+     * tbe [FragmentTransaction] to schedule a commit of the transaction.
+     *
+     * @param screen which screen should we navigate to: [Screens.BUTTONS] or [Screens.LOGS]
+     */
     override fun navigateTo(screen: Screens) {
-        val fragment = when (screen) {
+        val fragment: Fragment = when (screen) {
             Screens.BUTTONS -> ButtonsFragment()
             Screens.LOGS -> LogsFragment()
         }

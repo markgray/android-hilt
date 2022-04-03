@@ -28,6 +28,10 @@ enum class Screens {
  * Interfaces that defines an app navigator.
  */
 interface AppNavigator {
-    // Navigate to a given screen.
+    /**
+     * Navigate to a given screen.
+     *
+     * @param screen which screen should we navigate to: [Screens.BUTTONS] or [Screens.LOGS]
+     */
     fun navigateTo(screen: Screens)
 }
