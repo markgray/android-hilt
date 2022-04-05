@@ -22,13 +22,27 @@ import java.util.Date
 import javax.inject.Inject
 
 /**
- * String formatter for the log dates.
+ * String formatter for the log dates. The `Inject` annotation identifies our constructor as a
+ * injectable constructor to Hilt and Hilt generates a [DateFormatter_Factory] java class from
+ * this file which it will use when a [DateFormatter] class injection is requested..
  */
 class DateFormatter @Inject constructor() {
 
+    /**
+     * This is a [SimpleDateFormat] for the default locale.
+     */
     @SuppressLint("SimpleDateFormat")
     private val formatter = SimpleDateFormat("d MMM yyyy HH:mm:ss")
 
+    /**
+     * Formats a [Date] constructed from our [timestamp] parameter into a date/time string using the
+     * [SimpleDateFormat.format] method of our field [formatter] and returns that [String] to the
+     * caller.
+     *
+     * @param timestamp the number of milliseconds since January 1, 1970, 00:00:00 GMT.
+     * @return a human friendly [String] representation of the [Date] that the [timestamp] parameter
+     * represents.
+     */
     fun formatDate(timestamp: Long): String {
         return formatter.format(Date(timestamp))
     }
