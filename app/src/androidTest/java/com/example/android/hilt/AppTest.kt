@@ -18,6 +18,8 @@ package com.example.android.hilt
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.ViewAssertion
+import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -67,6 +69,34 @@ class AppTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
+    /**
+     * The Test annotation tells JUnit that the public void method to which it is attached can be
+     * run as a test case. First we call the [ActivityScenario.launch] method with a Java [Class]
+     * instance that corresponds to the [MainActivity] KClass and it launches  the [MainActivity]
+     * activity and constructs a [ActivityScenario] with the activity, then waits for the lifecycle
+     * state transitions to be complete (an [ActivityScenario] provides APIs to start and drive an
+     * Activity's lifecycle state for testing). We then perform four UI interactions and check that
+     * they cause the expected results:
+     *  1. We use the espresso method [withId] to create a matcher that matches the `View` with ID
+     *  [R.id.textView] and use that matcher in a call to the [onView] method of espresso to create
+     *  a [ViewInteraction] for that view, which we use to call its [ViewInteraction.check] method
+     *  to check for the [ViewAssertion] that the view matches the assertion [isDisplayed] (i.e.
+     *  the `View` is currently displayed on the screen to the user).
+     *  2. We use the espresso method [withId] to create a matcher that matches the `View` with ID
+     *  [R.id.button1] and use that matcher in a call to the [onView] method of espresso to create
+     *  a [ViewInteraction] for that view, which we use to call its [ViewInteraction.perform] method
+     *  to perform the action [click] to click that button.
+     *  3. We use the espresso method [withId] to create a matcher that matches the `View` with ID
+     *  [R.id.all_logs] and use that matcher in a call to the [onView] method of espresso to create
+     *  a [ViewInteraction] for that view, which we use to call its [ViewInteraction.perform] method
+     *  to perform the action [click] to click that button.
+     *  4. We use the espresso method [withText] to create a matcher that matches the `View` which
+     *  contains text containing the substring "Interaction with 'Button 1'" and use that matcher in
+     *  a call to the [onView] method of espresso to create a [ViewInteraction] for that view, which
+     *  we use to call its [ViewInteraction.check] method to check for the [ViewAssertion] that the
+     *  view matches the assertion [isDisplayed] (i.e. the `View` is currently displayed on the
+     *  screen to the user).
+     */
     @Test
     fun happyPath() {
         // Launches the `MainActivity` activity and constructs ActivityScenario with the activity.
