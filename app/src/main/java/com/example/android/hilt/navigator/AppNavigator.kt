@@ -20,7 +20,14 @@ package com.example.android.hilt.navigator
  * Available screens.
  */
 enum class Screens {
+    /**
+     * This is the screen that has buttons that the user can click
+     */
     BUTTONS,
+
+    /**
+     * This is the screen which displays the Log produced by clicking buttons on [BUTTONS]
+     */
     LOGS
 }
 

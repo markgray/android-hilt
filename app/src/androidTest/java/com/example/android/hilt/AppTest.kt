@@ -67,7 +67,7 @@ class AppTest {
      * shared between projects and classes.
      */
     @get:Rule
-    var hiltRule = HiltAndroidRule(this)
+    var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
 
     /**
      * The Test annotation tells JUnit that the public void method to which it is attached can be

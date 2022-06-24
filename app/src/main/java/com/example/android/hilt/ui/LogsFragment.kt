@@ -55,7 +55,8 @@ class LogsFragment : Fragment() {
      * dependencies container that Hilt automatically generated for LogsFragment.
      */
     @InMemoryLogger
-    @Inject lateinit var logger: LoggerDataSource
+    @Inject
+    lateinit var logger: LoggerDataSource
 
     /**
      * The `Inject` annotation causes Hilt to populate this field for us automagically in the
@@ -65,7 +66,8 @@ class LogsFragment : Fragment() {
      * the onAttach() lifecycle method with instances built in the dependencies container that Hilt
      * automatically generated for LogsFragment.
      */
-    @Inject lateinit var dateFormatter: DateFormatter
+    @Inject
+    lateinit var dateFormatter: DateFormatter
 
     /**
      * This is the [RecyclerView] in our layout file with the ID [R.id.recycler_view] that we use to

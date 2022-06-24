@@ -45,7 +45,7 @@ private const val CODE_LOGS_ITEM = 2
 /**
  * A ContentProvider that exposes the logs outside the application process.
  */
-class LogsContentProvider: ContentProvider() {
+class LogsContentProvider : ContentProvider() {
 
     /**
      * The `EntryPoint` annotation marks this interface as an entry point into a generated component.
@@ -61,6 +61,9 @@ class LogsContentProvider: ContentProvider() {
     @InstallIn(SingletonComponent::class)
     @EntryPoint
     interface LogsContentProviderEntryPoint {
+        /**
+         *
+         */
         fun logDao(): LogDao
     }
 

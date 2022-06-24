@@ -51,14 +51,16 @@ class ButtonsFragment : Fragment() {
      * dependencies container that Hilt automatically generated for [ButtonsFragment].
      */
     @InMemoryLogger
-    @Inject lateinit var logger: LoggerDataSource
+    @Inject
+    lateinit var logger: LoggerDataSource
 
     /**
      * The `Inject` annotation causes Hilt to populate this field for us automagically in the
      * onAttach() lifecycle method with instances built in the dependencies container that Hilt
      * automatically generated for [ButtonsFragment]
      */
-    @Inject lateinit var navigator: AppNavigator
+    @Inject
+    lateinit var navigator: AppNavigator
 
     /**
      * Called to have the fragment instantiate its user interface view. This will be called between

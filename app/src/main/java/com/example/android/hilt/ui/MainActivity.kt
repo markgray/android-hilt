@@ -45,7 +45,8 @@ class MainActivity : AppCompatActivity() {
      * it provides implements the [AppNavigator.navigateTo] method which we use to navigate to the
      * fragment we want to be showing.
      */
-    @Inject lateinit var navigator: AppNavigator
+    @Inject
+    lateinit var navigator: AppNavigator
 
     /**
      * Called when the activity is starting. First we call our super's implementation of `onCreate`,
