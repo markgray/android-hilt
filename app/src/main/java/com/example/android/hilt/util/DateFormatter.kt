@@ -16,9 +16,9 @@
 
 package com.example.android.hilt.util
 
-import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -29,10 +29,9 @@ import javax.inject.Inject
 class DateFormatter @Inject constructor() {
 
     /**
-     * This is a [SimpleDateFormat] for the default locale.
+     * This is a [SimpleDateFormat] for the [Locale.US] locale.
      */
-    @SuppressLint("SimpleDateFormat")
-    private val formatter = SimpleDateFormat("d MMM yyyy HH:mm:ss")
+    private val formatter = SimpleDateFormat("d MMM yyyy HH:mm:ss", Locale.US)
 
     /**
      * Formats a [Date] constructed from our [timestamp] parameter into a date/time string using the

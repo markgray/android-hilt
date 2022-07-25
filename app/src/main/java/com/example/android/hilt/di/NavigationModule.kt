@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("unused")
+@file:Suppress("unused") // It is @Inject'ed in ButtonsFragment.kt, and MainActivity.kt
 
 package com.example.android.hilt.di
 
