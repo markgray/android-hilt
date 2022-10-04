@@ -78,7 +78,9 @@ class MainActivity : AppCompatActivity() {
      * with fragments associated with this activity reports that there are no entries left in the
      * back stack we call [finish] to report that our activity is done and should be closed.
      */
+    @Deprecated("Deprecated in Java")  // TODO fix this deprecation Use OnBackInvokedCallback or androidx.activity.OnBackPressedCallback to handle back navigation instead.
     override fun onBackPressed() {
+        @Suppress("DEPRECATION")
         super.onBackPressed()
 
         if (supportFragmentManager.backStackEntryCount == 0) {
