@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
      */
     @Deprecated("Deprecated in Java")  // TODO fix this deprecation Use OnBackInvokedCallback or androidx.activity.OnBackPressedCallback to handle back navigation instead.
     override fun onBackPressed() {
+        // TODO: Fix to use OnBackPressedDispatcher
         @Suppress("DEPRECATION")
         super.onBackPressed()
 
