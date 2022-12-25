@@ -202,7 +202,7 @@ private class LogsViewAdapter(
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    @SuppressLint("SetTextI18n") // TODO: This is a Locale.US only app?
+    @SuppressLint("SetTextI18n") // This is a Locale.US only app
     override fun onBindViewHolder(holder: LogsViewHolder, position: Int) {
         val log: Log = logsDataSet[position]
         holder.textView.text = "${log.msg}\n\t${daterFormatter.formatDate(log.timestamp)}"
