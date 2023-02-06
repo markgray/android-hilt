@@ -21,10 +21,16 @@ import androidx.room.PrimaryKey
 
 /**
  * Data class that represent the a table in the database.
+ *
+ * @param msg the message
+ * @param timestamp the timestamp
  */
 @Entity(tableName = "logs")
 data class Log(val msg: String, val timestamp: Long) {
 
+    /**
+     * The primary key of our table
+     */
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 }

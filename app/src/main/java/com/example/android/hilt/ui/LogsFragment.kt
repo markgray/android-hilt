@@ -41,6 +41,9 @@ class LogsFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,12 +52,18 @@ class LogsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_logs, container, false)
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view).apply {
             setHasFixedSize(true)
         }
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -67,6 +76,9 @@ class LogsFragment : Fragment() {
             (context.applicationContext as LogApplication).serviceLocator.provideDateFormatter()
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onResume() {
         super.onResume()
 

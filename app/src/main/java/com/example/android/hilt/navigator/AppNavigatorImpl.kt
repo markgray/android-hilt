@@ -26,6 +26,9 @@ import com.example.android.hilt.ui.LogsFragment
  */
 class AppNavigatorImpl(private val activity: FragmentActivity) : AppNavigator {
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun navigateTo(screen: Screens) {
         val fragment = when (screen) {
             Screens.BUTTONS -> ButtonsFragment()

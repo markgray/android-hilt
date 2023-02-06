@@ -28,6 +28,9 @@ class DateFormatter {
     @SuppressLint("SimpleDateFormat")
     private val formatter = SimpleDateFormat("d MMM yyyy HH:mm:ss")
 
+    /**
+     * TODO: Add kdoc
+     */
     fun formatDate(timestamp: Long): String {
         return formatter.format(Date(timestamp))
     }

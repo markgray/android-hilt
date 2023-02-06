@@ -18,10 +18,19 @@ package com.example.android.hilt
 
 import android.app.Application
 
+/**
+ * TODO: Add kdoc
+ */
 class LogApplication : Application() {
 
+    /**
+     * TODO: Add kdoc
+     */
     lateinit var serviceLocator: ServiceLocator
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onCreate() {
         super.onCreate()
         serviceLocator = ServiceLocator(applicationContext)

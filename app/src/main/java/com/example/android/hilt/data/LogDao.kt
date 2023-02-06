@@ -26,12 +26,21 @@ import androidx.room.Query
 @Dao
 interface LogDao {
 
+    /**
+     * TODO: Add kdoc
+     */
     @Query("SELECT * FROM logs ORDER BY id DESC")
     fun getAll(): List<Log>
 
+    /**
+     * TODO: Add kdoc
+     */
     @Insert
     fun insertAll(vararg logs: Log)
 
+    /**
+     * TODO: Add kdoc
+     */
     @Query("DELETE FROM logs")
     fun nukeTable()
 }

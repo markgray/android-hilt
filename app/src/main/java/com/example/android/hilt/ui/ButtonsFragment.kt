@@ -37,6 +37,9 @@ class ButtonsFragment : Fragment() {
     private lateinit var logger: LoggerLocalDataSource
     private lateinit var navigator: AppNavigator
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +48,9 @@ class ButtonsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_buttons, container, false)
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -59,6 +65,9 @@ class ButtonsFragment : Fragment() {
             serviceLocator.provideNavigator(requireActivity())
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.findViewById<Button>(R.id.button1).setOnClickListener {
             logger.addLog("Interaction with 'Button 1'")

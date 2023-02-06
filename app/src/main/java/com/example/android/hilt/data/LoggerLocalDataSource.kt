@@ -31,6 +31,9 @@ class LoggerLocalDataSource(private val logDao: LogDao) {
         Handler(Looper.getMainLooper())
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     fun addLog(msg: String) {
         executorService.execute {
             logDao.insertAll(
@@ -42,6 +45,9 @@ class LoggerLocalDataSource(private val logDao: LogDao) {
         }
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     fun getAllLogs(callback: (List<Log>) -> Unit) {
         executorService.execute {
             val logs = logDao.getAll()
@@ -49,6 +55,9 @@ class LoggerLocalDataSource(private val logDao: LogDao) {
         }
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     fun removeLogs() {
         executorService.execute {
             logDao.nukeTable()
