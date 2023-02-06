@@ -30,9 +30,15 @@ private const val CODE_LOGS_ITEM = 2
  * A ContentProvider that exposes the logs outside the application process.
  */
 class LogsContentProvider: ContentProvider() {
+    /**
+     * TODO: Add kdoc
+     */
     @InstallIn(SingletonComponent::class)
     @EntryPoint
     interface LogsContentProviderEntryPoint {
+        /**
+         * TODO: Add kdoc
+         */
         fun logDao(): LogDao
     }
 
@@ -49,6 +55,9 @@ class LogsContentProvider: ContentProvider() {
         return hiltEntryPoint.logDao()
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onCreate(): Boolean {
         return true
     }
@@ -82,10 +91,16 @@ class LogsContentProvider: ContentProvider() {
         }
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         throw UnsupportedOperationException("Only reading operations are allowed")
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun update(
         uri: Uri,
         values: ContentValues?,
@@ -95,10 +110,16 @@ class LogsContentProvider: ContentProvider() {
         throw UnsupportedOperationException("Only reading operations are allowed")
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
         throw UnsupportedOperationException("Only reading operations are allowed")
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun getType(uri: Uri): String? {
         throw UnsupportedOperationException("Only reading operations are allowed")
     }

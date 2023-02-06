@@ -39,14 +39,24 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LogsFragment : Fragment() {
 
+    /**
+     * TODO: Add kdoc
+     */
     @InMemoryLogger
     @Inject
     lateinit var logger: LoggerDataSource
+
+    /**
+     * TODO: Add kdoc
+     */
     @Inject
     lateinit var dateFormatter: DateFormatter
 
     private lateinit var recyclerView: RecyclerView
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,12 +65,18 @@ class LogsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_logs, container, false)
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view).apply {
             setHasFixedSize(true)
         }
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onResume() {
         super.onResume()
 
@@ -95,7 +111,7 @@ private class LogsViewAdapter(
         return logsDataSet.size
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n") // It is a US only app
     override fun onBindViewHolder(holder: LogsViewHolder, position: Int) {
         val log = logsDataSet[position]
         holder.textView.text = "${log.msg}\n\t${daterFormatter.formatDate(log.timestamp)}"

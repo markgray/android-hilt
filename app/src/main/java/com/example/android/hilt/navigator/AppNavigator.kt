@@ -20,7 +20,14 @@ package com.example.android.hilt.navigator
  * Available screens.
  */
 enum class Screens {
+    /**
+     * TODO: Add kdoc
+     */
     BUTTONS,
+
+    /**
+     * TODO: Add kdoc
+     */
     LOGS
 }
 
@@ -28,6 +35,8 @@ enum class Screens {
  * Interfaces that defines an app navigator.
  */
 interface AppNavigator {
-    // Navigate to a given screen.
+    /**
+     * Navigate to a given screen.
+      */
     fun navigateTo(screen: Screens)
 }

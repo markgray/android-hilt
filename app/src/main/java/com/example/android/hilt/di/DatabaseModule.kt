@@ -11,15 +11,24 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * TODO: Add kdoc
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 object DatabaseModule {
 
+    /**
+     * TODO: Add kdoc
+     */
     @Provides
     fun provideLogDao(database: AppDatabase): LogDao {
         return database.logDao()
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext appContext: Context): AppDatabase {

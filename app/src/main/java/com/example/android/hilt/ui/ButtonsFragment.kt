@@ -39,10 +39,20 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ButtonsFragment : Fragment() {
 
+    /**
+     * TODO: Add kdoc
+     */
     @InMemoryLogger
     @Inject lateinit var logger: LoggerDataSource
+
+    /**
+     * TODO: Add kdoc
+     */
     @Inject lateinit var navigator: AppNavigator
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +61,9 @@ class ButtonsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_buttons, container, false)
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.findViewById<Button>(R.id.button1).setOnClickListener {
             logger.addLog("Interaction with 'Button 1'")

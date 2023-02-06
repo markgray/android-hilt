@@ -7,10 +7,16 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 
+/**
+ * TODO: Add kdoc
+ */
 @InstallIn(ActivityComponent::class)
 @Module
 abstract class NavigationModule {
 
+    /**
+     * TODO: Add kdoc
+     */
     @Binds
     abstract fun bindNavigator(impl: AppNavigatorImpl): AppNavigator
 }

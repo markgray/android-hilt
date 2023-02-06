@@ -29,7 +29,9 @@ class AppNavigatorImpl @Inject constructor(
     private val activity: FragmentActivity
 ) : AppNavigator {
 
-
+    /**
+     * TODO: Add kdoc
+     */
     override fun navigateTo(screen: Screens) {
         val fragment = when (screen) {
             Screens.BUTTONS -> ButtonsFragment()

@@ -26,9 +26,12 @@ import javax.inject.Inject
  */
 class DateFormatter @Inject constructor() {
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat") // What is wrong with this?
     private val formatter = SimpleDateFormat("d MMM yyyy HH:mm:ss")
 
+    /**
+     * TODO: Add kdoc
+     */
     fun formatDate(timestamp: Long): String {
         return formatter.format(Date(timestamp))
     }

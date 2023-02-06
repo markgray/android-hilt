@@ -35,6 +35,9 @@ class LoggerLocalDataSource @Inject constructor(
         Handler(Looper.getMainLooper())
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun addLog(msg: String) {
         executorService.execute {
             logDao.insertAll(
@@ -46,6 +49,9 @@ class LoggerLocalDataSource @Inject constructor(
         }
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun getAllLogs(callback: (List<Log>) -> Unit) {
         executorService.execute {
             val logs = logDao.getAll()
@@ -53,6 +59,9 @@ class LoggerLocalDataSource @Inject constructor(
         }
     }
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun removeLogs() {
         executorService.execute {
             logDao.nukeTable()

@@ -12,26 +12,44 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+/**
+ * TODO: Add kdoc
+ */
 @Qualifier
 annotation class InMemoryLogger
 
+/**
+ * TODO: Add kdoc
+ */
 @Qualifier
 annotation class DatabaseLogger
 
+/**
+ * TODO: Add kdoc
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class LoggingDatabaseModule {
 
+    /**
+     * TODO: Add kdoc
+     */
     @DatabaseLogger
     @Singleton
     @Binds
     abstract fun bindDatabaseLogger(impl: LoggerLocalDataSource): LoggerDataSource
 }
 
+/**
+ * TODO: Add kdoc
+ */
 @InstallIn(ActivityComponent::class)
 @Module
 abstract class LoggingInMemoryModule {
 
+    /**
+     * TODO: Add kdoc
+     */
     @InMemoryLogger
     @ActivityScoped
     @Binds
