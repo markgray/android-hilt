@@ -32,8 +32,14 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    /**
+     * TODO: Add kdoc
+     */
     @Inject lateinit var navigator: AppNavigator
 
+    /**
+     * TODO: Add kdoc
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,7 +49,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * TODO: Add kdoc
+     */
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
+        @Suppress("DEPRECATION")
         super.onBackPressed()
 
         if (supportFragmentManager.backStackEntryCount == 0) {

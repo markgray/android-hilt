@@ -37,7 +37,7 @@ import org.junit.runner.RunWith
 class AppTest {
 
     @get:Rule
-    var hiltRule = HiltAndroidRule(this)
+    var hiltRule: HiltAndroidRule = HiltAndroidRule(this)
 
     @Test
     fun happyPath() {

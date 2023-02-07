@@ -39,6 +39,7 @@
         <provider
             android:authorities="@string/content_authority"
             android:name=".contentprovider.LogsContentProvider"
-            android:exported="true"/>
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
     </application>
 </manifest>

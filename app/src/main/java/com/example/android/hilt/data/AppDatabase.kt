@@ -20,9 +20,17 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 /**
- * SQLite Database for storing the logs.
+ * SQLite Database for storing the logs. The `Database` annotation marks this class as a
+ * [RoomDatabase], the `entities` parameter specifies the list of entities included in the database,
+ * with each entity turned into a table in the database (in our case just the [Log] data class), the
+ * `version` parameter is the database version, and `exportSchema` parameter when set to `true` will
+ * tell Room to export the database schema into a folder (we set it to `false` to prevent this).
  */
-@Database(entities = arrayOf(Log::class), version = 1, exportSchema = false)
+@Database(entities = [Log::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
+    /**
+     * Returns the singleton instance of the Room generated implementation of the [LogDao] interface
+     * (a [LogDao_Impl] object).
+     */
     abstract fun logDao(): LogDao
 }
