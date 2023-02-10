@@ -79,7 +79,7 @@ abstract class LoggingInMemoryModule {
 
     /**
      * The `Binds` annotation tells Hilt to provide an instance of [LoggerInMemoryDataSource] when
-     * a [LoggerDataSource] dependency labeled with the `DatabaseLogger` annotation is encountered,
+     * a [LoggerDataSource] dependency labeled with the `InMemoryLogger` annotation is encountered,
      * and the `ActivityScoped` annotation indicates to Hilt the binding should exist for the life
      * of an activity.
      */
