@@ -3,30 +3,54 @@ package com.example.android.hilt.data
 import dagger.hilt.android.scopes.ActivityScoped
 import java.util.LinkedList
 import javax.inject.Inject
+import com.example.android.hilt.ui.ButtonsFragment
+import com.example.android.hilt.ui.LogsFragment
 
 /**
- * TODO: Add kdoc
+ * In memory implementaton of the [LoggerDataSource] Logger data source interface.  The Inject
+ * annotation Identifies injectable constructors, methods, and fields. Constructors are injected
+ * first, followed by fields, and then methods. Fields and methods in superclasses are injected
+ * before those in subclasses. Ordering of injection among fields and among methods in the same
+ * class is not specified. Injectable constructors are annotated with Inject and accept zero or
+ * more dependencies as arguments. Inject can apply to at most one constructor per class. Hilt
+ * generates the [LoggerInMemoryDataSource_Factory]  class from this file which implements the
+ * `Factory` of [LoggerInMemoryDataSource] with its [LoggerInMemoryDataSource_Factory.get] method
+ * supplying a new instance of [LoggerInMemoryDataSource]. Used as the argument of the
+ * `bindDatabaseLogger` method of the `LoggingDatabaseModule` abstract class used to generate the
+ * [LoggerDataSource] it injects into [ButtonsFragment] and [LogsFragment] when the `InMemoryLogger`
+ * annotation is applied instead of the `DatabaseLogger` annotation to the `Inject` annotation of
+ * the [LoggerDataSource].
  */
 class LoggerInMemoryDataSource @Inject constructor() : LoggerDataSource {
 
+    /**
+     * Our "database" of [Log] entries.
+     */
     private val logs = LinkedList<Log>()
 
     /**
-     * TODO: Add kdoc
+     * Constructs a [Log] instance from its [String] parameter [msg] and the current system time and
+     * adds it to our [LinkedList] of [Log] field [logs].
+     *
+     * @param msg the [String] to use for the [Log] instance we construct and add to the Logger data
+     * source.
      */
     override fun addLog(msg: String) {
         logs.addFirst(Log(msg, System.currentTimeMillis()))
     }
 
     /**
-     * TODO: Add kdoc
+     * Retrieves all of the [Log] entries stored in our [LinkedList] of [Log] field [logs] and feeds
+     * it as the argument of the [callback] lambda we are called with.
+     *
+     * @param callback a lambda which takes a [List] of [Log] instances as its argument.
      */
     override fun getAllLogs(callback: (List<Log>) -> Unit) {
         callback(logs)
     }
 
     /**
-     * TODO: Add kdoc
+     * Removes all [Log] instances stored in our [LinkedList] of [Log] field [logs].
      */
     override fun removeLogs() {
         logs.clear()

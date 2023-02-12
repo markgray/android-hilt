@@ -21,12 +21,12 @@ package com.example.android.hilt.navigator
  */
 enum class Screens {
     /**
-     * TODO: Add kdoc
+     * This is the screen that has buttons that the user can click
      */
     BUTTONS,
 
     /**
-     * TODO: Add kdoc
+     * This is the screen which displays the Log produced by clicking buttons on [BUTTONS]
      */
     LOGS
 }
@@ -37,6 +37,8 @@ enum class Screens {
 interface AppNavigator {
     /**
      * Navigate to a given screen.
-      */
+     *
+     * @param screen which screen should we navigate to: [Screens.BUTTONS] or [Screens.LOGS]
+     */
     fun navigateTo(screen: Screens)
 }
