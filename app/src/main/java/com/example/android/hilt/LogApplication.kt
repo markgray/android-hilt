@@ -20,7 +20,12 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 /**
- * TODO: Add kdoc
+ * The `HiltAndroidApp` annotation triggers Hilt's code generation, including a base class for your
+ * application that can use dependency injection that will be named "Hilt_LogApplication.java".
+ * The application container is the parent container for the app, which means that other containers
+ * can access the dependencies that it provides. All modules and entry points that should be
+ * installed in the component by Dagger need to be transitive compilation dependencies of this
+ * application. (i.e. they need to be dependencies of the dependencies of this application.
  */
 @HiltAndroidApp
 class LogApplication : Application()
