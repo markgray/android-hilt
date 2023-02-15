@@ -18,6 +18,7 @@ package com.example.android.hilt.ui
 
 import android.os.Bundle
 import android.widget.FrameLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.example.android.hilt.R
@@ -67,24 +68,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                supportFragmentManager.popBackStack()
+                if (supportFragmentManager.backStackEntryCount == 0) {
+                    finish()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
+
         if (savedInstanceState == null) {
             navigator.navigateTo(Screens.BUTTONS)
         }
     }
 
-    /**
-     * Called when the activity has detected the user's press of the back key. First we call our
-     * super's implementation of `onBackPressed`, then if the [FragmentManager] for interacting
-     * with fragments associated with this activity reports that there are no entries left in the
-     * back stack we call [finish] to report that our activity is done and should be closed.
-     */
-    @Deprecated("Deprecated in Java")  // TODO fix this deprecation Use OnBackInvokedCallback or androidx.activity.OnBackPressedCallback to handle back navigation instead.
-    override fun onBackPressed() {
-        @Suppress("DEPRECATION") // TODO: Fix to use OnBackPressedDispatcher
-        super.onBackPressed()
-
-        if (supportFragmentManager.backStackEntryCount == 0) {
-            finish()
-        }
-    }
 }
