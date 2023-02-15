@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                supportFragmentManager.popBackStack()
+                supportFragmentManager.popBackStackImmediate()
                 if (supportFragmentManager.backStackEntryCount == 0) {
                     finish()
                 }
