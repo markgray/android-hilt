@@ -52,12 +52,18 @@ class MainActivity : AppCompatActivity() {
     /**
      * Called when the activity is starting. First we call our super's implementation of `onCreate`,
      * then we set our content view to our layout file [R.layout.activity_main] which consists of
-     * just a [FrameLayout] whose ID is [R.id.main_container]. If our [Bundle] parameter
-     * [savedInstanceState] is `null` this is the first time we are being called so we call the
-     * [AppNavigator.navigateTo] method of our field [navigator] to have it navigate to the
-     * [Screens.BUTTONS] fragment (aka [ButtonsFragment]). If [savedInstanceState] is not `null`
-     * we are being restarted after a configuration change and the system will see that the previous
-     * fragment is restored.
+     * just a [FrameLayout] whose ID is [R.id.main_container]. Next we initialize our
+     * [OnBackPressedCallback] variable `val callback` to an instance which overrides the
+     * [OnBackPressedCallback.handleOnBackPressed] method to first call the
+     * [FragmentManager.popBackStackImmediate] method of the `supportFragmentManager`, then if its
+     * [FragmentManager.getBackStackEntryCount] returns 0 its calls the [finish] method to close the
+     * Activity.
+     *
+     * Then if our [Bundle] parameter [savedInstanceState] is `null` this is the first time we are
+     * being called so we call the [AppNavigator.navigateTo] method of our field [navigator] to have
+     * it navigate to the [Screens.BUTTONS] fragment (aka [ButtonsFragment]). If [savedInstanceState]
+     * is not `null` we are being restarted after a configuration change and the system will see that
+     * the previous fragment is restored.
      *
      * @param savedInstanceState If non-`null` this activity is being re-constructed from a
      * previous saved state as given here, and we use this fact to skip navigating to one of
