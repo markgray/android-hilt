@@ -17,7 +17,10 @@
 package com.example.android.hilt.ui
 
 import android.os.Bundle
+import android.widget.FrameLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.example.android.hilt.LogApplication
 import com.example.android.hilt.R
 import com.example.android.hilt.navigator.AppNavigator
@@ -33,29 +36,43 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigator: AppNavigator
 
     /**
-     * TODO: Add kdoc
+     * Called when the activity is starting. First we call our super's implementation of `onCreate`,
+     * then we set our content view to our layout file [R.layout.activity_main] which consists of
+     * just a [FrameLayout] whose ID is [R.id.main_container]. Next we initialize our
+     * [OnBackPressedCallback] variable `val callback` to an instance which overrides the
+     * [OnBackPressedCallback.handleOnBackPressed] method to first call the
+     * [FragmentManager.popBackStackImmediate] method of the `supportFragmentManager`, then if its
+     * [FragmentManager.getBackStackEntryCount] returns 0 its calls the [finish] method to close the
+     * Activity.
+     *
+     * Then if our [Bundle] parameter [savedInstanceState] is `null` this is the first time we are
+     * being called so we call the [AppNavigator.navigateTo] method of our field [navigator] to have
+     * it navigate to the [Screens.BUTTONS] fragment (aka [ButtonsFragment]). If [savedInstanceState]
+     * is not `null` we are being restarted after a configuration change and the system will see that
+     * the previous fragment is restored.
+     *
+     * @param savedInstanceState If non-`null` this activity is being re-constructed from a
+     * previous saved state as given here, and we use this fact to skip navigating to one of
+     * our fragments if we are being re-constructed since the system will see to it that the
+     * previous fragment is restored for us.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                supportFragmentManager.popBackStackImmediate()
+                if (supportFragmentManager.backStackEntryCount == 0) {
+                    finish()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
         navigator = (applicationContext as LogApplication).serviceLocator.provideNavigator(this)
 
         if (savedInstanceState == null) {
             navigator.navigateTo(Screens.BUTTONS)
-        }
-    }
-
-    /**
-     * TODO: Add kdoc
-     */
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        @Suppress("DEPRECATION")
-        super.onBackPressed()
-
-        if (supportFragmentManager.backStackEntryCount == 0) {
-            finish()
         }
     }
 }
