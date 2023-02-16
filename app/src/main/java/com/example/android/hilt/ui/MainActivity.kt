@@ -18,6 +18,7 @@ package com.example.android.hilt.ui
 
 import android.os.Bundle
 import android.widget.FrameLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.example.android.hilt.R
@@ -50,12 +51,18 @@ class MainActivity : AppCompatActivity() {
     /**
      * Called when the activity is starting. First we call our super's implementation of `onCreate`,
      * then we set our content view to our layout file [R.layout.activity_main] which consists of
-     * just a [FrameLayout] whose ID is [R.id.main_container]. If our [Bundle] parameter
-     * [savedInstanceState] is `null` this is the first time we are being called so we call the
-     * [AppNavigator.navigateTo] method of our field [navigator] to have it navigate to the
-     * [Screens.BUTTONS] fragment (aka [ButtonsFragment]). If [savedInstanceState] is not `null`
-     * we are being restarted after a configuration change and the system will see that the previous
-     * fragment is restored.
+     * just a [FrameLayout] whose ID is [R.id.main_container]. Next we initialize our
+     * [OnBackPressedCallback] variable `val callback` to an instance which overrides the
+     * [OnBackPressedCallback.handleOnBackPressed] method to first call the
+     * [FragmentManager.popBackStackImmediate] method of the `supportFragmentManager`, then if its
+     * [FragmentManager.getBackStackEntryCount] returns 0 its calls the [finish] method to close the
+     * Activity.
+     *
+     * Then if our [Bundle] parameter [savedInstanceState] is `null` this is the first time we are
+     * being called so we call the [AppNavigator.navigateTo] method of our field [navigator] to have
+     * it navigate to the [Screens.BUTTONS] fragment (aka [ButtonsFragment]). If [savedInstanceState]
+     * is not `null` we are being restarted after a configuration change and the system will see that
+     * the previous fragment is restored.
      *
      * @param savedInstanceState If non-`null` this activity is being re-constructed from a
      * previous saved state as given here, and we use this fact to skip navigating to one of
@@ -66,24 +73,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                supportFragmentManager.popBackStackImmediate()
+                if (supportFragmentManager.backStackEntryCount == 0) {
+                    finish()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
+
         if (savedInstanceState == null) {
             navigator.navigateTo(Screens.BUTTONS)
-        }
-    }
-
-    /**
-     * Called when the activity has detected the user's press of the back key. First we call our
-     * super's implementation of `onBackPressed`, then if the [FragmentManager] for interacting
-     * with fragments associated with this activity reports that there are no entries left in the
-     * back stack we call [finish] to report that our activity is done and should be closed.
-     */
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        @Suppress("DEPRECATION") // TODO: Fix onBackPressed deprecation
-        super.onBackPressed()
-
-        if (supportFragmentManager.backStackEntryCount == 0) {
-            finish()
         }
     }
 }
