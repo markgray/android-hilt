@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.example.android.hilt.LogApplication
 import com.example.android.hilt.R
+import com.example.android.hilt.ServiceLocator
 import com.example.android.hilt.navigator.AppNavigator
 import com.example.android.hilt.navigator.Screens
 
@@ -44,6 +45,9 @@ class MainActivity : AppCompatActivity() {
      * [FragmentManager.popBackStackImmediate] method of the `supportFragmentManager`, then if its
      * [FragmentManager.getBackStackEntryCount] returns 0 its calls the [finish] method to close the
      * Activity.
+     *
+     * We initialize our [AppNavigator] field [navigator] using the [ServiceLocator.provideNavigator]
+     * method of the [LogApplication.serviceLocator] of our app.
      *
      * Then if our [Bundle] parameter [savedInstanceState] is `null` this is the first time we are
      * being called so we call the [AppNavigator.navigateTo] method of our field [navigator] to have
@@ -69,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         onBackPressedDispatcher.addCallback(this, callback)
+
         navigator = (applicationContext as LogApplication).serviceLocator.provideNavigator(this)
 
         if (savedInstanceState == null) {
