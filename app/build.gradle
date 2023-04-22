@@ -34,11 +34,12 @@ android {
 
         testInstrumentationRunner 'com.example.android.hilt.CustomTestRunner'
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments["room.incremental"] = "true"
-            }
-        }
+        // Room's incremental annotation processing option is now ON by default
+//      javaCompileOptions {
+//          annotationProcessorOptions {
+//              arguments["room.incremental"] = "true"
+//          }
+//      }
     }
 
     compileOptions {
