@@ -23,7 +23,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.android.hilt"
@@ -61,6 +61,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:2.5.2"
+    //noinspection KaptUsageInsteadOfKsp TODO: Switch to plugins for ksp
     kapt "androidx.room:room-compiler:2.5.2"
 
     // Testing dependencies
