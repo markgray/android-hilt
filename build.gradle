@@ -15,7 +15,7 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.8.20' // TODO: Hilt does not support kotlin 1.9.0 yet!
+    ext.kotlin_version = '1.9.0'
     repositories {
         google()
         mavenCentral()
@@ -23,7 +23,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:8.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.44.2"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.48"
     }
 }
 
