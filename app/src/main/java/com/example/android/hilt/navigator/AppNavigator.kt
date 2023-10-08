@@ -37,6 +37,6 @@ enum class Screens {
 interface AppNavigator {
     /**
      * Navigate to a given screen.
-      */
+     */
     fun navigateTo(screen: Screens)
 }
