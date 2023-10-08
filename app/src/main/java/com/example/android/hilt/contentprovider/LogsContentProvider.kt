@@ -29,7 +29,7 @@ private const val CODE_LOGS_ITEM = 2
 /**
  * A ContentProvider that exposes the logs outside the application process.
  */
-class LogsContentProvider: ContentProvider() {
+class LogsContentProvider : ContentProvider() {
     /**
      * The `EntryPoint` annotation marks this interface as an entry point into a generated component.
      * This annotation must be used with `InstallIn` to indicate which component(s) should have this
