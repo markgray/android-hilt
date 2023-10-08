@@ -20,10 +20,12 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.devtools.ksp'
 }
 
 android {
     compileSdk 34
+
     defaultConfig {
         applicationId "com.example.android.hilt"
         minSdkVersion 16
@@ -31,7 +33,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'com.example.android.hilt.CustomTestRunner'
 
         // Room's incremental annotation processing option is now ON by default
 //      javaCompileOptions {
@@ -60,8 +62,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:2.5.2"
-    //noinspection KaptUsageInsteadOfKsp TODO: Switch to plugins for ksp
-    kapt "androidx.room:room-compiler:2.5.2"
+    ksp "androidx.room:room-compiler:2.5.2"
 
     // Testing dependencies
     androidTestImplementation "junit:junit:4.13.2"
@@ -71,6 +72,10 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
 
     // Hilt dependencies
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation 'com.google.dagger:hilt-android:2.48'
+    kapt 'com.google.dagger:hilt-android-compiler:2.48'
+
+    // Hilt testing dependencies
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.48'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.48'
 }
