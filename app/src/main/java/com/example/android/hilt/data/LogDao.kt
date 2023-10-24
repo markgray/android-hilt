@@ -59,7 +59,7 @@ interface LogDao {
      * [Log.id] field matches our [id] parameter.
      */
     @Query("SELECT * FROM logs WHERE id = :id")
-    fun selectLogById(id: Long): Cursor?
+    fun selectLogById(id: Long): Cursor
 
     /**
      * The `Query` annotation marks a method in a Dao annotated class as a query method. The value
