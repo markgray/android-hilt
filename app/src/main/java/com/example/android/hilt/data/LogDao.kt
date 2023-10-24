@@ -97,5 +97,5 @@ interface LogDao {
      * [Log.id] field matches our [id] parameter.
      */
     @Query("SELECT * FROM logs WHERE id = :id")
-    fun selectLogById(id: Long): Cursor?
+    fun selectLogById(id: Long): Cursor
 }
