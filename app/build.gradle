@@ -15,25 +15,25 @@
  */
 
 plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    id "kotlin-parcelize"
-    id "kotlin-kapt"
-    id "dagger.hilt.android.plugin"
-    id "com.google.devtools.ksp"
+    id ("com.android.application")
+    id ("kotlin-android")
+    id ("kotlin-parcelize")
+    id ("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
+    id ("com.google.devtools.ksp")
 }
 
 android {
-    compileSdk 34
+    compileSdk (34)
 
     defaultConfig {
-        applicationId "com.example.android.hilt"
-        minSdkVersion 19
-        targetSdkVersion 34
-        versionCode 1
-        versionName "1.0"
+        applicationId ("com.example.android.hilt")
+        minSdkVersion (19)
+        targetSdkVersion (34)
+        versionCode (1)
+        versionName ("1.0")
 
-        testInstrumentationRunner "com.example.android.hilt.CustomTestRunner"
+        testInstrumentationRunner ("com.example.android.hilt.CustomTestRunner")
 
         // Room"s incremental annotation processing option is now ON by default
 //      javaCompileOptions {
