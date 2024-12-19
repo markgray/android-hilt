@@ -18,7 +18,6 @@ plugins {
     id ("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.parcelize")
-    id("org.jetbrains.kotlin.kapt")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
 }
@@ -62,10 +61,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     // Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.53")
-    kapt("com.google.dagger:hilt-android-compiler:2.53")
+    implementation("com.google.dagger:hilt-android:2.53.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.53.1")
 
     // Hilt testing dependencies
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.53")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.53")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.53.1")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.53.1")
 }
