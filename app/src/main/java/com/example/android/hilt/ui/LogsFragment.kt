@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.hilt.R
 import com.example.android.hilt.data.Log
 import com.example.android.hilt.data.LoggerDataSource
-import com.example.android.hilt.data.LoggerLocalDataSource
 import com.example.android.hilt.data.LoggerInMemoryDataSource
 import com.example.android.hilt.di.InMemoryLogger
 import com.example.android.hilt.util.DateFormatter
@@ -71,7 +70,7 @@ class LogsFragment : Fragment() {
     lateinit var dateFormatter: DateFormatter
 
     /**
-     * This is the [RecyclerView] in our layout file with the ID [R.id.recycler_view] that we use to
+     * This is the [RecyclerView] in our layout file with the ID `R.id.recycler_view` that we use to
      * display the [Log] entries in our database.
      */
     private lateinit var recyclerView: RecyclerView
@@ -82,7 +81,7 @@ class LogsFragment : Fragment() {
      * and move logic that operates on the returned [View] to [onViewCreated].
      *
      * We return the [View] that our [LayoutInflater] parameter [inflater] inflates from the layout
-     * file with ID [R.layout.fragment_logs] when it uses our [ViewGroup] parameter [container]
+     * file with ID `R.layout.fragment_logs` when it uses our [ViewGroup] parameter [container]
      * for the `LayoutParams` without attaching to it.
      *
      * @param inflater The [LayoutInflater] object that can be used to inflate
@@ -106,7 +105,7 @@ class LogsFragment : Fragment() {
     /**
      * Called immediately after [onCreateView] has returned, but before any saved state has been
      * restored in to the view. We initialize our [RecyclerView] field [recyclerView] by finding
-     * the [View] with ID [R.id.recycler_view] in our [View] parameter [view] and use the [apply]
+     * the [View] with ID `R.id.recycler_view` in our [View] parameter [view] and use the [apply]
      * extension function to call its [RecyclerView.setHasFixedSize] method with the value `true`
      * to inform it that adapter changes cannot affect the size of the [RecyclerView] (which allows
      * it to perform several optimizations).
@@ -166,7 +165,7 @@ private class LogsViewAdapter(
     /**
      * Called when [RecyclerView] needs a new [RecyclerView.ViewHolder] of the given type to represent
      * an item. We return the [View] that the [LayoutInflater] from the context of our [ViewGroup]
-     * parameter [parent] inflates from the layout file with ID [R.layout.text_row_item] when it uses
+     * parameter [parent] inflates from the layout file with ID `R.layout.text_row_item` when it uses
      * our [ViewGroup] parameter [parent] for the `LayoutParams` without attaching to it.
      *
      * @param parent The [ViewGroup] into which the new [View] will be added after it is bound to

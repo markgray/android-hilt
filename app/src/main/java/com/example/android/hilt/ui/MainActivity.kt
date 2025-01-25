@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Called when the activity is starting. First we call our super's implementation of `onCreate`,
-     * then we set our content view to our layout file [R.layout.activity_main] which consists of
-     * just a [FrameLayout] whose ID is [R.id.main_container]. Next we initialize our
+     * then we set our content view to our layout file `R.layout.activity_main` which consists of
+     * just a [FrameLayout] whose ID is `R.id.main_container`. Next we initialize our
      * [OnBackPressedCallback] variable `val callback` to an instance which overrides the
      * [OnBackPressedCallback.handleOnBackPressed] method to first call the
      * [FragmentManager.popBackStackImmediate] method of the `supportFragmentManager`, then if its

@@ -1,10 +1,9 @@
 package com.example.android.hilt.data
 
-import dagger.hilt.android.scopes.ActivityScoped
-import java.util.LinkedList
-import javax.inject.Inject
 import com.example.android.hilt.ui.ButtonsFragment
 import com.example.android.hilt.ui.LogsFragment
+import java.util.LinkedList
+import javax.inject.Inject
 
 /**
  * In memory implementaton of the [LoggerDataSource] Logger data source interface.  The Inject

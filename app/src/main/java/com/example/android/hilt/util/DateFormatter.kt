@@ -16,7 +16,6 @@
 
 package com.example.android.hilt.util
 
-import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
