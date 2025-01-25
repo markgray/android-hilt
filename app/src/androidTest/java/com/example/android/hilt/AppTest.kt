@@ -78,16 +78,16 @@ class AppTest {
      * Activity's lifecycle state for testing). We then perform four UI interactions and check that
      * they cause the expected results:
      *  1. We use the espresso method [withId] to create a matcher that matches the `View` with ID
-     *  [R.id.textView] and use that matcher in a call to the [onView] method of espresso to create
+     *  `R.id.textView` and use that matcher in a call to the [onView] method of espresso to create
      *  a [ViewInteraction] for that view, which we use to call its [ViewInteraction.check] method
      *  to check for the [ViewAssertion] that the view matches the assertion [isDisplayed] (i.e.
      *  the `View` is currently displayed on the screen to the user).
      *  2. We use the espresso method [withId] to create a matcher that matches the `View` with ID
-     *  [R.id.button1] and use that matcher in a call to the [onView] method of espresso to create
+     *  `R.id.button1` and use that matcher in a call to the [onView] method of espresso to create
      *  a [ViewInteraction] for that view, which we use to call its [ViewInteraction.perform] method
      *  to perform the action [click] to click that button.
      *  3. We use the espresso method [withId] to create a matcher that matches the `View` with ID
-     *  [R.id.all_logs] and use that matcher in a call to the [onView] method of espresso to create
+     *  `R.id.all_logs` and use that matcher in a call to the [onView] method of espresso to create
      *  a [ViewInteraction] for that view, which we use to call its [ViewInteraction.perform] method
      *  to perform the action [click] to click that button.
      *  4. We use the espresso method [withText] to create a matcher that matches the `View` which

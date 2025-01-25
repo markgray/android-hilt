@@ -68,7 +68,7 @@ class ButtonsFragment : Fragment() {
      * and move logic that operates on the returned [View] to [onViewCreated].
      *
      * We return the [View] that our [LayoutInflater] parameter [inflater] inflates from the layout
-     * file with ID [R.layout.fragment_buttons] when it uses our [ViewGroup] parameter [container]
+     * file with ID `R.layout.fragment_buttons` when it uses our [ViewGroup] parameter [container]
      * for the `LayoutParams` without attaching to it.
      *
      * @param inflater The [LayoutInflater] object that can be used to inflate
@@ -91,19 +91,19 @@ class ButtonsFragment : Fragment() {
 
     /**
      * Called immediately after [onCreateView] has returned, but before any saved state has been
-     * restored in to the view. We locate the [Button] with ID [R.id.button1] in our [View] parameter
+     * restored in to the view. We locate the [Button] with ID `R.id.button1` in our [View] parameter
      * [view] and set its [View.OnClickListener] to a lambda which calls the [LoggerDataSource.addLog]
      * method of our [logger] field to add a [Log] constructed to contain the message "Interaction
-     * with 'Button 1'", locate the [Button] with ID [R.id.button2] in our [View] parameter [view]
+     * with 'Button 1'", locate the [Button] with ID `R.id.button2` in our [View] parameter [view]
      * and set its [View.OnClickListener] to a lambda which calls the [LoggerDataSource.addLog]
      * method of our [logger] field to add a [Log] constructed to contain the message "Interaction
-     * with 'Button 2'", and locate the [Button] with ID [R.id.button3] in our [View] parameter
+     * with 'Button 2'", and locate the [Button] with ID `R.id.button3` in our [View] parameter
      * [view] and set its [View.OnClickListener] to a lambda which calls the [LoggerDataSource.addLog]
      * method of our [logger] field to add a [Log] constructed to contain the message "Interaction
-     * with 'Button 3'". Next we locate the [Button] with ID [R.id.all_logs] in our [View] parameter
+     * with 'Button 3'". Next we locate the [Button] with ID `R.id.all_logs` in our [View] parameter
      * [view] and set its [View.OnClickListener] to a lambda which calls the [AppNavigator.navigateTo]
      * method of our [navigator] field with the enum [Screens.LOGS] to navigate to the [LogsFragment]
-     * and finally locate the [Button] with ID [R.id.delete_logs] in our [View] parameter [view] and
+     * and finally locate the [Button] with ID `R.id.delete_logs` in our [View] parameter [view] and
      * set its [View.OnClickListener] to a lambda which calls the [LoggerDataSource.removeLogs]
      * method of our [logger] field to have it remove all of [Log] instances stored in [logger].
      *

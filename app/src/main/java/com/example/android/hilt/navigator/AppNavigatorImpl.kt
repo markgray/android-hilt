@@ -47,7 +47,7 @@ class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivit
      * a new instance of [ButtonsFragment] when our [screen] parameter is [Screens.BUTTONS] or a
      * new instance of [LogsFragment] is it is [Screens.LOGS]. Then we use the [FragmentManager]
      * for interacting with fragments associated with this activity to begin a [FragmentTransaction]
-     * which we use to replace the current contents of the [FrameLayout] with ID [R.id.main_container]
+     * which we use to replace the current contents of the [FrameLayout] with ID `R.id.main_container`
      * with the [Fragment] `fragment`, then use that [FragmentTransaction] to add the transaction to
      * the back stack, using the canonical name of the underlying class of `fragment` as the name
      * for this back stack state, after which we call the [FragmentTransaction.commit] method of
