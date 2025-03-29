@@ -62,9 +62,9 @@ dependencies {
 
     // Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.56")
-    ksp("com.google.dagger:hilt-android-compiler:2.55")
+    ksp("com.google.dagger:hilt-android-compiler:2.56")
 
     // Hilt testing dependencies
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.56")
-    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.55")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.56")
 }
