@@ -50,8 +50,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     // Room
-    implementation("androidx.room:room-runtime:2.7.0")
-    ksp("androidx.room:room-compiler:2.7.0")
+    implementation("androidx.room:room-runtime:2.7.1")
+    ksp("androidx.room:room-compiler:2.7.1")
 
     // Testing dependencies
     androidTestImplementation("junit:junit:4.13.2")
