@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id ("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -23,11 +25,11 @@ plugins {
 }
 
 android {
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.example.android.hilt"
         minSdk = 21
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -36,8 +38,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+        }
     }
     namespace = "com.example.android.hilt"
 }
@@ -50,8 +54,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     // Room
-    implementation("androidx.room:room-runtime:2.7.1")
-    ksp("androidx.room:room-compiler:2.7.1")
+    implementation("androidx.room:room-runtime:2.7.2")
+    ksp("androidx.room:room-compiler:2.7.2")
 
     // Testing dependencies
     androidTestImplementation("junit:junit:4.13.2")
@@ -62,9 +66,9 @@ dependencies {
 
     // Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.56.2")
-    ksp("com.google.dagger:hilt-android-compiler:2.56")
+    ksp("com.google.dagger:hilt-android-compiler:2.56.2")
 
     // Hilt testing dependencies
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.56.2")
-    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.56")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.56.2")
 }
