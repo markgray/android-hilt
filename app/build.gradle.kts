@@ -49,10 +49,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     // Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.56.2")
-    ksp("com.google.dagger:hilt-android-compiler:2.56.2")
+    implementation("com.google.dagger:hilt-android:2.57")
+    ksp("com.google.dagger:hilt-android-compiler:2.57")
 
     // Hilt testing dependencies
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.56.2")
-    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.56.2")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.57")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.57")
 }
