@@ -38,8 +38,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     // Room
-    implementation("androidx.room:room-runtime:2.8.0")
-    ksp("androidx.room:room-compiler:2.8.0")
+    implementation("androidx.room:room-runtime:2.8.1")
+    ksp("androidx.room:room-compiler:2.8.1")
 
     // Testing dependencies
     androidTestImplementation("junit:junit:4.13.2")
@@ -49,10 +49,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 
     // Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.57.1")
-    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    ksp("com.google.dagger:hilt-android-compiler:2.57.2")
 
     // Hilt testing dependencies
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.57.1")
-    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.57.1")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.57.2")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.57.2")
 }
