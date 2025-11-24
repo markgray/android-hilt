@@ -17,11 +17,14 @@
 package com.example.android.hilt.ui
 
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.Insets
+import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
@@ -42,11 +45,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigator: AppNavigator
 
     /**
-     * Called when the activity is starting. First we call our super's implementation of `onCreate`,
-     * then we set our content view to our layout file `R.layout.activity_main` which consists of
-     * just a [FrameLayout] whose ID is `R.id.main_container`. Next we initialize our
-     * [OnBackPressedCallback] variable `val callback` to an instance which overrides the
-     * [OnBackPressedCallback.handleOnBackPressed] method to first call the
+     * Called when the activity is starting. First we call [enableEdgeToEdge] to enable edge to edge
+     * display, then we call our super's implementation of `onCreate`, set our content view to our
+     * layout file `R.layout.activity_main` which consists of just a [FrameLayout] whose ID is
+     * `R.id.main_container`. We initialize our [FrameLayout] variable `rootView` by finding the
+     * view with ID `R.id.main_container`, then we use the [ViewCompat.setOnApplyWindowInsetsListener]
+     * method to set an [OnApplyWindowInsetsListener] to take over over the policy for applying window
+     * insets to `rootView`, with the `listener` argument a lambda that accepts the [View] passed the
+     * lambda in variable `v` and the [WindowInsetsCompat] passed the lambda in variable `windowInsets`.
+     * It initializes its [Insets] variable `insets` to the [WindowInsetsCompat.getInsets] of
+     * `windowInsets` with [WindowInsetsCompat.Type.systemBars] as the argument, then it updates the
+     * layout parameters of `v` to be a [ViewGroup.MarginLayoutParams] with the left margin set to
+     * `insets.left`, the right margin set to `insets.right`, the top margin set to `insets.top`,
+     * and the bottom margin set to `insets.bottom`. Finally it returns [WindowInsetsCompat.CONSUMED]
+     * to the caller (so that the window insets will not keep passing down to descendant views).     *
+     *
+     * Next we initialize our [OnBackPressedCallback] variable `val callback` to an instance which
+     * overrides the [OnBackPressedCallback.handleOnBackPressed] method to first call the
      * [FragmentManager.popBackStackImmediate] method of the `supportFragmentManager`, then if its
      * [FragmentManager.getBackStackEntryCount] returns 0 its calls the [finish] method to close the
      * Activity.
